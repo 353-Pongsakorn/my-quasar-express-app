@@ -29,12 +29,12 @@ app.get('/api/demo', (req, res) => {
 
   res.json({
     git: {
-      title: 'Advanced Git Workflow',
-      detail: 'ใช้ branch protection บน GitHub, code review ใน PR, และ squash merge เพื่อ history สะอาด'
+      title: 'ชื่อ-นามสกุล',
+      detail: 'พงศกร ทนานนท์'
     },
     docker: {
-      title: 'Advanced Docker',
-      detail: 'ใช้ multi-stage build, healthcheck ใน Dockerfile, และ orchestration ด้วย Compose/Swarm'
+      title: 'รหัสนักศึกษา',
+      detail: '6604101353'
     }
   });
 });
@@ -45,7 +45,6 @@ app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send('Something broke!');
 });
-
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

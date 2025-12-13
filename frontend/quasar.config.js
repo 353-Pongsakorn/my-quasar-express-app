@@ -2,6 +2,9 @@
 // https://v2.quasar.dev/quasar-cli-webpack/quasar-config-file
 
 import { defineConfig } from '#q-app/wrappers'
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 export default defineConfig((ctx) => {
   return {
@@ -47,7 +50,7 @@ export default defineConfig((ctx) => {
       // webpackTranspileDependencies: [],
 
       esbuildTarget: {
-        browser: [ 'es2022', 'firefox115', 'chrome115', 'safari14' ],
+        browser: ['es2022', 'firefox115', 'chrome115', 'safari14'],
         node: 'node20'
       },
 
@@ -62,6 +65,13 @@ export default defineConfig((ctx) => {
       // https://v2.quasar.dev/quasar-cli-webpack/handling-webpack
       // "chain" is a webpack-chain object https://github.com/sorrycc/webpack-chain
       // chainWebpack (/* chain, { isClient, isServer } */) {}
+
+      env: {
+        VUE_APP_API_URL: ctx.dev
+          ? (process.env.VUE_APP_API_URL || 'http://localhost:3000')
+          : (process.env.VUE_APP_API_URL || 'http://localhost:3000'),
+        API_URL: process.env.API_URL || 'http://localhost:3000'
+      }
     },
 
     // Full list of options: https://v2.quasar.dev/quasar-cli-webpack/quasar-config-file#devserver
@@ -111,7 +121,7 @@ export default defineConfig((ctx) => {
     // https://v2.quasar.dev/quasar-cli-webpack/developing-ssr/configuring-ssr
     ssr: {
       prodPort: 3000, // The default port that the production server should use
-                      // (gets superseded if process.env.PORT is specified at runtime)
+      // (gets superseded if process.env.PORT is specified at runtime)
 
       middlewares: [
         'render' // keep this as last one
@@ -163,7 +173,7 @@ export default defineConfig((ctx) => {
       // extendPackageJson (json) {},
 
       // Electron preload scripts (if any) from /src-electron, WITHOUT file extension
-      preloadScripts: [ 'electron-preload' ],
+      preloadScripts: ['electron-preload'],
 
       // specify the debugging port to use for the Electron app when running in development mode
       inspectPort: 5858,
